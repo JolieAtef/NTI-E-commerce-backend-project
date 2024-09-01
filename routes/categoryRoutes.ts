@@ -6,6 +6,7 @@ import subcategoryRoute from "./subcategoryRoutes";
 
 const categoryRoute: Router = Router();
 categoryRoute.use('/:categoryId/subcategories', subcategoryRoute);
+// in post man we put id in place of (:categoryId) :means variable
 
 categoryRoute.route('/')
   .get(getCategories)

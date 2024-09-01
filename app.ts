@@ -3,7 +3,6 @@ import { Server } from 'http';
 import dotenv from "dotenv";
 import mountRoutes from './routes';
 import Database from './config/Database';
-import { createCategory } from "./controllers/category-functions";
 
 
 const app: express.Application=express()
