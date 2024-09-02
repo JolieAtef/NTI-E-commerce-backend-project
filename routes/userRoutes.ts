@@ -1,10 +1,17 @@
 import { Router } from "express";
-import { changeUserPassword,createUser, deleteUser, getUser, getUsers, resizeUserImage, updateUser, uploadUserImage } from "../controllers/user-functions";
-import { createUserValidator, deleteUserValidator, getUserValidator, updateUserValidator } from "../utils/validation/userValidator";
-import { allowedTo, checkActive, protectRoutes } from "../controllers/auth";
+import { changeUserPassword, createUser, deleteUser, setLoggedUserId, getUser, getUsers, resizeUserImage, updateUser, uploadUserImage, updateLoggedUser, changeLoggedUserPassword } from "../controllers/user-functions";
+import { changeLoggedUserPasswordValidator, changeUserPasswordValidator, createUserValidator, deleteUserValidator, getUserValidator, updateLoggedUserValidator, updateUserValidator } from "../utils/validation/userValidator";
+import { allowedTo, checkActive, protectRoutes } from "../controllers/auth-functions";
 
 const usersRoute: Router = Router();
-usersRoute.use(protectRoutes, checkActive, allowedTo('manager'))
+usersRoute.use(protectRoutes, checkActive);
+
+usersRoute.get('/me', setLoggedUserId, getUser)
+usersRoute.put('/updateMe', updateLoggedUserValidator, updateLoggedUser)
+usersRoute.put('/changeMyPassword', changeLoggedUserPasswordValidator, changeLoggedUserPassword)
+usersRoute.delete('/deleteMe', allowedTo('user'), setLoggedUserId, deleteUser)
+
+usersRoute.use(allowedTo('manager'));
 usersRoute.route('/')
   .get(getUsers)
   .post(uploadUserImage, resizeUserImage, createUserValidator, createUser);

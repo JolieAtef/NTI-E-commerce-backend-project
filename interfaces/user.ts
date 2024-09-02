@@ -1,4 +1,5 @@
 import { Document } from "mongoose";
+import { Products } from "./product";
 type Role = 'manager' | 'admin' | 'user'
 
 export interface Users extends Document {
@@ -7,9 +8,10 @@ export interface Users extends Document {
   name: string;
   image: string;
   role: Role;
+  wishlist:Products[];
   active: boolean;
   passwordChangedAt: Date | number;
-  resetCode: string;
-  resetCodeExpireTime: Date | number;
-  resetCodeVerify: boolean
+  resetCode: string | undefined;
+  resetCodeExpireTime: Date | number | undefined;
+  resetCodeVerify: boolean | undefined;
 }

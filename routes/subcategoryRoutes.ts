@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { createSubcategory, deleteSubcategory, getSubcategories, getSubcategory, updateSubcategory, filterData} from "../controllers/subcategory-functions";
 import { createSubcategoryValidator, deleteSubcategoryValidator, getSubcategoryValidator, updateSubcategoryValidator } from "../utils/validation/subcategoryValidator";
-import { allowedTo, checkActive, protectRoutes } from "../controllers/auth";
+import { allowedTo, checkActive, protectRoutes } from "../controllers/auth-functions";
 const subcategoryRoute: Router = Router({ mergeParams: true });
 
 subcategoryRoute.route('/')

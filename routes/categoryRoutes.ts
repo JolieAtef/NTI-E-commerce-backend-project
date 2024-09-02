@@ -2,7 +2,7 @@ import { Router } from "express";
 import { createCategory, deleteCategory, getCategories, getCategory, updateCategory } from "../controllers/category-functions";
 import { createCategoryValidator, deleteCategoryValidator, getCategoryValidator, updateCategoryValidator } from "../utils/validation/categoryValidator";
 import subcategoryRoute from "./subcategoryRoutes";
-import { allowedTo, checkActive, protectRoutes } from "../controllers/auth";
+import { allowedTo, checkActive, protectRoutes } from "../controllers/auth-functions";
 
 const categoryRoute: Router = Router();
 categoryRoute.use('/:categoryId/subcategories', subcategoryRoute);

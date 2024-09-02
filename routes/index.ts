@@ -7,6 +7,8 @@ import globalErrors from "../middlewares/globalErrors";
 import productsRoute from './productRoute';
 import userRoute from './userRoutes';
 import authRoute from './authRoutes';
+import reviewsRoute from './reviewRoute';
+import wishlistRoute from './wishlistRoute';
 
 
 const mountRoutes = (app: Application): void => {
@@ -15,6 +17,8 @@ const mountRoutes = (app: Application): void => {
   app.use('/api/v1/product', productsRoute);
   app.use('/api/v1/users', userRoute);
   app.use('/api/v1/auth', authRoute);
+  app.use('/api/v1/reviews', reviewsRoute);
+  app.use('/api/v1/wishlist', wishlistRoute);
 
   app.all('*', (req: Request, res: Response, next: NextFunction) => {
     next(new ApiErrors(`The router ${req.originalUrl} is not found`, 400))
