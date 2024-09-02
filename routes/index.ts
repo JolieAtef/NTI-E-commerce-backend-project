@@ -11,6 +11,7 @@ import reviewsRoute from './reviewRoutes';
 import wishlistRoute from './wishlistRoutes';
 import couponsRoute from './couponRoutes';
 import cartsRoute from './cartRoutes';
+import ordersRoute from './orderRoutes';
 
 const mountRoutes = (app: Application): void => {
   app.use('/api/v1/category', categoryRoute);
@@ -20,9 +21,10 @@ const mountRoutes = (app: Application): void => {
   app.use('/api/v1/wishlist', wishlistRoute);
   app.use('/api/v1/coupons', couponsRoute);
   app.use('/api/v1/carts', cartsRoute);
+  app.use('/api/v1/orders', ordersRoute);
   app.use('/api/v1/users', userRoute);
   app.use('/api/v1/auth', authRoute);
-  
+
   app.all('*', (req: Request, res: Response, next: NextFunction) => {
     next(new ApiErrors(`The router ${req.originalUrl} is not found`, 400))
   })

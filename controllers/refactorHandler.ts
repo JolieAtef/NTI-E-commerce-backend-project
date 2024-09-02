@@ -30,7 +30,7 @@ export const getAll = <modelType>(model: mongoose.Model<any>, modelName: string)
 export const getOne = <modelType>(model: mongoose.Model<any>) => asyncHandler(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const document = await model.findById(req.params.id);
   if (!document) {
-    return next(new ApiErrors('Document not found', 404))
+    return next(new ApiErrors(req.__('notFound'), 404))
   }
   res.status(200).json({ data: document });
 })
@@ -45,7 +45,7 @@ export const createOne = <modelType>(model: mongoose.Model<any>) => asyncHandler
 export const updateOne = <modelType>(model: mongoose.Model<any>) => asyncHandler(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const document = await model.findByIdAndUpdate(req.params.id, req.body, { new: true });
   if (!document) {
-    return next(new ApiErrors('Document not found', 404))
+    return next(new ApiErrors(req.__('notFound'), 404))
   }
   res.status(200).json({ data: document });
 })
