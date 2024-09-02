@@ -11,6 +11,7 @@ export interface Users extends Document {
   wishlist:Products[];
   active: boolean;
   passwordChangedAt: Date | number;
+  //undefined for line 96,97,98 in controllers/auth-functions
   resetCode: string | undefined;
   resetCodeExpireTime: Date | number | undefined;
   resetCodeVerify: boolean | undefined;
