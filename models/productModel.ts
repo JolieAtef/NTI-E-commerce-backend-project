@@ -16,10 +16,31 @@ const productsSchema: Schema = new Schema<Products>({
   subcategory: { type: Schema.Types.ObjectId, required: true, ref: 'subCategories' }
 }, { timestamps: true });
 
+
 productsSchema.pre<Products>(/^find/, function (next) {
   this.populate({ path:'category', select: 'name' })
   this.populate({ path:'subcategory', select: 'name' })
   next()
 })
+
+const imageUrl = (document: Products) => {
+  if (document.cover) {
+    const imageUrl: string = `${process.env.BASE_URL}/products/${document.cover}`;
+    document.cover = imageUrl;
+  }
+  if (document.images) {
+    const imageList: string[] = [];
+    document.images.forEach(image => {
+      const imageUrl: string = `${process.env.BASE_URL}/products/${image}`
+      imageList.push(imageUrl);
+    });
+    document.images = imageList;
+  }
+}
+
+productsSchema
+  .post('init', (document: Products) => { imageUrl(document) })
+  .post('save', (document: Products) => { imageUrl(document) })
+
 
 export default model<Products>('products', productsSchema)
