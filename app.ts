@@ -18,7 +18,7 @@ dotenv.config()
 app.use(express.json({ limit: '10kb' }))
 // security
 app.use(cors({
-  origin: ['http://localhost:3500', 'https://dramcode.top'],
+  origin: ['http://localhost:4200', 'https://dramcode.top'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
@@ -29,7 +29,7 @@ app.use(hpp({ whitelist: ['price', 'category', 'subcategory', 'ratingAverage', '
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }))
 ////
 
-app.use(express.static('uploads'))
+app.use(express.static('upload'))
 Database()
 mountRoutes(app);
 
@@ -43,7 +43,7 @@ const i18n = new I18n({
 app.use(i18n.init)
 ////////////
 
-server=app.listen(process.env.port ,()=> {
+server= app.listen(process.env.port,()=> {
     console.log(`listen on port ${process.env.port}`)
 })
 process.on('unhandledRejection', (err: Error) => {
@@ -53,3 +53,7 @@ process.on('unhandledRejection', (err: Error) => {
       process.exit(1);
     });
   });
+
+
+  ////to run the projct :
+  //npm run start:development

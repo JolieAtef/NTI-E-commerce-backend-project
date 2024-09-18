@@ -27,6 +27,7 @@ export const getOrder = getOne<Orders>(ordersModel)
 
 // create order
 export const createOrder = asyncHandler(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  
   // 0 tax price
   const taxPrice: number = 100;
   // 1 Get user cart
@@ -36,10 +37,11 @@ export const createOrder = asyncHandler(async (req: Request, res: Response, next
   const cartPrice: number = cart.totalPriceAfterDiscount ? cart.totalPriceAfterDiscount : cart.totalPrice;
   const totalOrderPrice: number = cartPrice + taxPrice;
   // 3 create order
+ 
   const order: Orders = await ordersModel.create({
     user: req.user?._id,
     totalPrice: totalOrderPrice,
-    address: req.body.address,
+    // address: req.body.address,
     cartItems: cart.cartItems,
     taxPrice
   })

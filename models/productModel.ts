@@ -15,7 +15,7 @@ const productsSchema: Schema = new Schema<Products>({
   category: { type: Schema.Types.ObjectId, required: true, ref: 'categories' },
   subcategory: { type: Schema.Types.ObjectId, required: true, ref: 'subCategories' }
 }, { timestamps: true });
-
+//productsSchema.virtual('reviews', { ref: 'reviews', foreignField: 'product', localField: '_id' })
 
 productsSchema.pre<Products>(/^find/, function (next) {
   this.populate({ path:'category', select: 'name' })
@@ -25,13 +25,13 @@ productsSchema.pre<Products>(/^find/, function (next) {
 
 const imageUrl = (document: Products) => {
   if (document.cover) {
-    const imageUrl: string = `${process.env.BASE_URL}/products/${document.cover}`;
+    const imageUrl: string = `${process.env.BASE_URL}/product/${document.cover}`;
     document.cover = imageUrl;
   }
   if (document.images) {
     const imageList: string[] = [];
     document.images.forEach(image => {
-      const imageUrl: string = `${process.env.BASE_URL}/products/${image}`
+      const imageUrl: string = `${process.env.BASE_URL}/product/${image}`
       imageList.push(imageUrl);
     });
     document.images = imageList;

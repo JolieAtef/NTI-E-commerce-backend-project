@@ -7,6 +7,7 @@ export interface Users extends Document {
   password: string;
   name: string;
   image: string;
+  address:string;
   role: Role;
   wishlist:Products[];
   active: boolean;

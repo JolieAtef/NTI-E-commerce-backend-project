@@ -2,7 +2,10 @@ import { Router } from "express";
 import { createProduct, deleteProduct, getProduct, getProducts, updateProduct ,  resizeImages,  uploadProductImages} from "../controllers/product-functions";
 import { createProductValidator, deleteProductValidator, getProductValidator, updateProductValidator } from "../utils/validation/productValidator";
 import { allowedTo, checkActive, protectRoutes } from "../controllers/auth-functions";
+import reviewsRoute from "./reviewRoutes";
+
 const productsRoute: Router = Router();
+productsRoute.use('/:productId/reviews', reviewsRoute);
 
 productsRoute.route('/')
   .get(getProducts)
