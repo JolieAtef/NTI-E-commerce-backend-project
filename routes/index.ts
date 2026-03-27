@@ -24,6 +24,9 @@ const mountRoutes = (app: Application): void => {
   app.use('/api/v1/orders', ordersRoute);
   app.use('/api/v1/users', userRoute);
   app.use('/api/v1/auth', authRoute);
+  app.use('/', ()=>{
+    console.log("server is working")
+  })
 
   app.all('*', (req: Request, res: Response, next: NextFunction) => {
     next(new ApiErrors(`The router ${req.originalUrl} is not found`, 400))

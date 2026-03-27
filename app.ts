@@ -44,12 +44,9 @@ const i18n = new I18n({
 app.use(i18n.init)
 ////////////
 
-// server= app.listen(process.env.port,()=> {
-//     console.log(`listen on port ${process.env.port}`)
-// })
-export default (req: any, res: any) => {
-  return app(req, res);
-};
+server= app.listen(process.env.port,()=> {
+    console.log(`listen on port ${process.env.port}`)
+})
 
 process.on('unhandledRejection', (err: Error) => {
     console.error(`unhandledRejection ${err.name} | ${err.message}`);
@@ -57,7 +54,7 @@ process.on('unhandledRejection', (err: Error) => {
       console.error('shutting the application down');
       process.exit(1);
     });
-  });
+});
 
 
   ////to run the projct :
