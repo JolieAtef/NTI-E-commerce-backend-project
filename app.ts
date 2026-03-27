@@ -18,7 +18,8 @@ dotenv.config()
 app.use(express.json({ limit: '10kb' }))
 // security
 app.use(cors({
-  origin: ['http://localhost:4200', 'https://dramcode.top'],
+  origin:"*",
+  // origin: ['http://localhost:4200', 'https://dramcode.top'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
